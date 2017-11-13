@@ -1,10 +1,35 @@
 <html lang="en">
   
   <head>
-    <link rel="stylesheet" href="css/bootstrap.min.css">
-    <link rel="stylesheet" href="css/extra.css">
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ" crossorigin="anonymous"></script>
     <script type="text/javascript" src="js/main_page.js"></script>
+
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+       <link rel="stylesheet" href="css/extra.css">
+
     <title>Stock Management System</title>
+    <script>
+      $('#exampleModal').on('show.bs.modal', function (event) {
+        var button = $(event.relatedTarget) // Button that triggered the modal
+        var recipient = button.data('whatever') // Extract info from data-* attributes
+        // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
+        // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
+        var modal = $(this)
+        modal.find('.modal-title').text('New message to ' + recipient)
+        modal.find('.modal-body input').val(recipient)
+      });
+
+      function expandForm() {
+          var x = document.getElementById("formDiv");
+          if (x.style.display === "none") {
+              x.style.display = "block";
+          } else {
+              x.style.display = "none";
+          }
+      }
+    </script>
   </head>
   
   <body>
@@ -20,8 +45,82 @@
           <h4> Stock Management </h4>
           <p>
             Manage stock levels here; Add/Remove, Update Stock level
-          
-          <div class="span3">
+        </p>
+      </div>
+        <div style="margin:25px">
+        <button type="button" class="btn btn-success" onclick="expandForm()"> Show/Hide: Add New Item</button>
+      </div>
+          <div id="formDiv" style="display:none">
+            <div class="col-xs-12 col-sm-8 col-md-4 col-sm-offset-2 col-md-offset-4">
+           <div class="panel-body">
+              <form role="form">
+                <div class="row">
+                  <div class="col-xs-6 col-sm-6 col-md-6">
+                    <div class="form-group">
+                      <input type="text" name="first_name" id="item_code" class="form-control input-sm" placeholder="First Name">
+                    </div>
+                  </div>
+                  <div class="col-xs-6 col-sm-6 col-md-6">
+                    <div class="form-group">
+                      <input type="text" name="last_name" id="item_name" class="form-control input-sm" placeholder="Last Name">
+                    </div>
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <input type="text" name="last_name" id="item_qty" class="form-control input-sm" placeholder="Last Name">
+                </div>
+
+                <div class="row">
+                  <div class="col-xs-6 col-sm-6 col-md-6">
+                    <div class="form-group">
+                      <input type="text" name="last_name" id="item_name" class="form-control input-sm" placeholder="Last Name">
+                    </div>
+                  </div>
+                  <div class="col-xs-6 col-sm-6 col-md-6">
+                    <div class="form-group">
+                      <input type="password" name="password_confirmation" id="password_confirmation" class="form-control input-sm" placeholder="Confirm Password">
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-xs-6 col-sm-6 col-md-6">
+                    <div class="form-group">
+                      <input type="text" name="first_name" id="firstname" class="form-control input-sm" placeholder="First Name">
+                    </div>
+                  </div>
+                  <div class="col-xs-6 col-sm-6 col-md-6">
+                    <div class="form-group">
+                      <input type="text" name="last_name" id="last_name" class="form-control input-sm" placeholder="Last Name">
+                    </div>
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <input type="email" name="email" id="email" class="form-control input-sm" placeholder="Email Address">
+                </div>
+
+                <div class="row">
+                  <div class="col-xs-6 col-sm-6 col-md-6">
+                    <div class="form-group">
+                      <input type="password" name="password" id="password" class="form-control input-sm" placeholder="Password">
+                    </div>
+                  </div>
+                  <div class="col-xs-6 col-sm-6 col-md-6">
+                    <div class="form-group">
+                      <input type="password" name="password_confirmation" id="password_confirmation" class="form-control input-sm" placeholder="Confirm Password">
+                    </div>
+                  </div>
+                </div>
+                
+                <input type="submit" value="Add Item" onclick="expandForm()" class="btn btn-info btn-block">
+              
+              </form>
+            </div>
+          </div>
+          </div>
+
+          <div class="dataTable">
             <table class="table table-striped">
               <thead>
                 <tr>
