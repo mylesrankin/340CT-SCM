@@ -1,0 +1,17 @@
+{
+  "name": "stockcontrolsystem",
+  "version": "1.0.0",
+  "description": "",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron ."
+  },
+  "author": "Myles Rankin",
+  "license": "ISC",
+  "devDependencies": {
+    "electron": "^1.7.9"
+  },
+  "dependencies":{
+  	"nedb":"*"
+  }
+}

@@ -1,0 +1,120 @@
+<html lang="en">
+  
+  <head>
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/extra.css">
+    <script type="text/javascript" src="js/main_page.js"></script>
+    <title>Stock Management System</title>
+  </head>
+  
+  <body>
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-md-6">
+          <h1>M-MART<small> Stock Management System</small></h1>
+        </div>
+      </div>
+      <div class="panel-group">
+
+        <div class="well well-lg">
+          <h4> Stock Management </h4>
+          <p>
+            Manage stock levels here; Add/Remove, Update Stock level
+          
+          <div class="span3">
+            <table class="table table-striped">
+              <thead>
+                <tr>
+                  <th>Item_Code</th>
+                  <th>Item_Name</th>
+                  <th>Item_Price</th>
+                  <th>Item_Qty</th>
+                  <th>Item_ArrivalDate</th>
+                  <th>Item_MinRestockQty</th>
+                  <th>Item_MaxStockQty</th>
+                  <th>Item_Status</th>
+                  <th>Item_StaffCheckName</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>0001</td>
+                  <td>Static_Test_Item</td>
+                  <td>99.99</td>
+                  <td>99</td>
+                  <td>01-01-2017</td>
+                  <td>10</td>
+                  <td>99</td>
+                  <td>Fully Stocked</td>
+                  <td>Derek</td>
+                </tr>
+              </tbody>
+            </table>
+
+              <p><a class="btn" href="#">View details &raquo;</a></p>
+            </div>
+        </div>
+
+      </div>
+      </div>
+    </div>
+
+
+
+  </body>
+
+<!--
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Electron Demo</title>
+  <link rel="stylesheet" href="css/skeleton.css">
+  <link rel="stylesheet" href="css/index.css">
+  <script type="text/javascript" src="js/index.js"></script>
+</head>
+<body>
+  <div class="container">
+
+    <h3>Add a person:</h3>
+    <div class="row">
+      <div class="five columns">
+        <label for="firstname">Firstname</label>
+        <input class="u-full-width" placeholder="John" id="firstname" type="text">
+      </div>
+      <div class="five columns">
+        <label for="lastname">Lastname</label>
+        <input class="u-full-width" placeholder="Doe" id="lastname" type="text">
+      </div>
+      <div class="two columns">
+        <label for="add" class="invisible">x</label>
+        <input class="button-primary" value="Add" id="add" type="button">
+      </div>
+    </div>
+
+    <h3>All persons:</h3>
+    <table class="u-full-width">
+      <thead>
+        <tr>
+          <th>Firstname</th>
+          <th>Lastname</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody id="tablebody">
+      </tbody>
+    </table>
+  </div>
+
+  <script type="text/javascript">
+    var remote = require('electron').remote;
+    document.addEventListener('keydown', function (e) {
+      if (e.which === 123) {
+        remote.getCurrentWindow().webContents.openDevTools();
+      } else if (e.which === 116) {
+        location.reload();
+      }
+    });
+</script>
+</body>
+</html>
+-->
