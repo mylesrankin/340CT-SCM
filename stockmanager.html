@@ -1,37 +1,13 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <title>Stock Management System</title>  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js" onload="window.$ = window.jQuery = module.exports;"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-
-</head>
-<body>
-
-<div class="container-fluid">
-  <div class="row">
-      <div class="col-md-6">
-          <h1>M-MART<small> Stock Management System</small></h1>
-        </div>
-  </div>
-
-  <ul class="nav nav-tabs">
-    <li class="active"><a data-toggle="tab" href="#home">Home</a></li>
-    <li><a data-toggle="tab" href="#menu1">Menu 1</a></li>
-    <li><a data-toggle="tab" href="#menu2">Menu 2</a></li>
-    <li><a data-toggle="tab" href="#menu3">Menu 3</a></li>
-  </ul>
-
-  <div class="tab-content">
-    <div id="home" class="tab-pane fade in active">
-        <!-- start of stock management -->
-        <h3> Manage Stock </h3>
-        <div style="margin:25px">
-        <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#addnewitem" aria-expanded="false" aria-controls="addnewitem">Show/Hide Add New Item</button>
+        <div class="well well-lg">
+          <h4> Stock Management </h4>
+          <p>
+            Manage stock levels here; Add/Remove, Update Stock level
+        </p>
       </div>
-          <div id="addnewitem" class="collapse"> <!-- form div -->
+        <div style="margin:25px">
+        <button type="button" class="btn btn-success" onclick="expandForm('formDiv')"> Show/Hide: Add New Item</button> <div id="successBox"></h4></div>
+      </div>
+          <div id="formDiv" style="display:none">
             <div id="errorBox"></h4></div>
           <div class="col-xs-12 col-sm-8 col-md-4 col-sm-offset-2 col-md-offset-4">
            <div class="panel-body">
@@ -91,7 +67,7 @@
               </form>
             </div>
           </div>
-          </div> <!-- end of form div? -->
+          </div>
 
           <div class="dataTable">
             <table class="table table-striped">
@@ -123,34 +99,3 @@
               </tbody>
             </table>
             </div>
-            <!-- end of stock management -->
-    </div>
-    <div id="menu1" class="tab-pane fade">
-      <h3>Menu 1</h3>
-      <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-    </div>
-    <div id="menu2" class="tab-pane fade">
-      <h3>Menu 2</h3>
-      <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam.</p>
-    </div>
-    <div id="menu3" class="tab-pane fade">
-      <h3>Menu 3</h3>
-      <p>Eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.</p>
-    </div>
-  </div>
-</div>
-
-
-<script type="text/javascript">
-    var remote = require('electron').remote;
-    document.addEventListener('keydown', function (e) {
-      if (e.which === 123) {
-        remote.getCurrentWindow().webContents.openDevTools();
-      } else if (e.which === 116) {
-        location.reload();
-      }
-    });
-</script>
-
-</body>
-</html>

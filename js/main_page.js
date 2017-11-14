@@ -1,4 +1,7 @@
 const database = require('./js/database');
+const { remote } = require('electron')
+const path = require('path')
+const url = require('url')
 
 window.onload = function() {
   populateTable();
@@ -37,6 +40,24 @@ window.onload = function() {
     }
 
   });
+
+  document.getElementById('page2').addEventListener('click', () => {
+    console.log("Go page2");
+    remote.getCurrentWindow().loadURL(url.format({
+        pathname: path.join(__dirname, 'page2.html'),
+        protocol: 'file:',
+        slashes: true
+        })
+    );
+  });
+
+  document.addEventListener('keydown', function (e) {
+    if (e.which === 123) {
+        remote.getCurrentWindow().webContents.openDevTools();
+      } else if (e.which === 116) {
+        location.reload();
+      }
+    });
 }
 
 function populateTable() {
