@@ -1,5 +1,5 @@
 
 .dataTable {  
     height: auto !important;
-    overflow: scroll;
+    overflow-y: scroll;
 }​

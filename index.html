@@ -1,26 +1,17 @@
 <html lang="en">
   
   <head>
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <!--<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ" crossorigin="anonymous"></script>-->
+
     <script type="text/javascript" src="js/main_page.js"></script>
 
     <link rel="stylesheet" href="css/bootstrap.min.css">
-       <link rel="stylesheet" href="css/extra.css">
+    <link rel="stylesheet" href="css/extra.css">
 
     <title>Stock Management System</title>
     <script>
-      $('#exampleModal').on('show.bs.modal', function (event) {
-        var button = $(event.relatedTarget) // Button that triggered the modal
-        var recipient = button.data('whatever') // Extract info from data-* attributes
-        // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
-        // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
-        var modal = $(this)
-        modal.find('.modal-title').text('New message to ' + recipient)
-        modal.find('.modal-body input').val(recipient)
-      });
-
       function expandForm() {
           var x = document.getElementById("formDiv");
           if (x.style.display === "none") {
@@ -48,73 +39,64 @@
         </p>
       </div>
         <div style="margin:25px">
-        <button type="button" class="btn btn-success" onclick="expandForm()"> Show/Hide: Add New Item</button>
+        <button type="button" class="btn btn-success" onclick="expandForm()"> Show/Hide: Add New Item</button> <div id="successBox"></h4></div>
       </div>
           <div id="formDiv" style="display:none">
+            <div id="errorBox"></h4></div>
             <div class="col-xs-12 col-sm-8 col-md-4 col-sm-offset-2 col-md-offset-4">
            <div class="panel-body">
               <form role="form">
                 <div class="row">
                   <div class="col-xs-6 col-sm-6 col-md-6">
                     <div class="form-group">
-                      <input type="text" name="first_name" id="item_code" class="form-control input-sm" placeholder="First Name">
+                      <input type="number" name="item_code" id="item_code" class="form-control input-sm" placeholder="Item_Code">
                     </div>
                   </div>
                   <div class="col-xs-6 col-sm-6 col-md-6">
                     <div class="form-group">
-                      <input type="text" name="last_name" id="item_name" class="form-control input-sm" placeholder="Last Name">
-                    </div>
-                  </div>
-                </div>
-
-                <div class="form-group">
-                  <input type="text" name="last_name" id="item_qty" class="form-control input-sm" placeholder="Last Name">
-                </div>
-
-                <div class="row">
-                  <div class="col-xs-6 col-sm-6 col-md-6">
-                    <div class="form-group">
-                      <input type="text" name="last_name" id="item_name" class="form-control input-sm" placeholder="Last Name">
-                    </div>
-                  </div>
-                  <div class="col-xs-6 col-sm-6 col-md-6">
-                    <div class="form-group">
-                      <input type="password" name="password_confirmation" id="password_confirmation" class="form-control input-sm" placeholder="Confirm Password">
+                      <input type="text" name="item_name" id="item_name" class="form-control input-sm" placeholder="Item_Name">
                     </div>
                   </div>
                 </div>
                 <div class="row">
                   <div class="col-xs-6 col-sm-6 col-md-6">
                     <div class="form-group">
-                      <input type="text" name="first_name" id="firstname" class="form-control input-sm" placeholder="First Name">
+                      <input type="text" name="item_price" id="item_price" class="form-control input-sm" placeholder="Item_Price">
                     </div>
                   </div>
                   <div class="col-xs-6 col-sm-6 col-md-6">
                     <div class="form-group">
-                      <input type="text" name="last_name" id="last_name" class="form-control input-sm" placeholder="Last Name">
+                     <input type="date" name="item_arrivalDate" id="item_arrivalDate" class="form-control input-sm" placeholder="Item_ArrivalDate">
                     </div>
                   </div>
                 </div>
-
-                <div class="form-group">
-                  <input type="email" name="email" id="email" class="form-control input-sm" placeholder="Email Address">
+                <div class="row">
+                  <div class="col-xs-6 col-sm-6 col-md-6">
+                    <div class="form-group">
+                      <input type="number" name="item_minRestockQty" id="item_minRestockQty" class="form-control input-sm" placeholder="Item_MinRestockQty">
+                    </div>
+                  </div>
+                  <div class="col-xs-6 col-sm-6 col-md-6">
+                    <div class="form-group">
+                      <input type="number" name="item_maxStockQty" id="item_maxStockQty" class="form-control input-sm" placeholder="Item_MaxStockQty" required="true">
+                    </div>
+                  </div>
                 </div>
 
                 <div class="row">
                   <div class="col-xs-6 col-sm-6 col-md-6">
                     <div class="form-group">
-                      <input type="password" name="password" id="password" class="form-control input-sm" placeholder="Password">
+                      <input type="text" name="item_staffCheckName" id="item_staffCheckName" class="form-control input-sm" placeholder="Item_StaffCheckName">
                     </div>
                   </div>
                   <div class="col-xs-6 col-sm-6 col-md-6">
                     <div class="form-group">
-                      <input type="password" name="password_confirmation" id="password_confirmation" class="form-control input-sm" placeholder="Confirm Password">
+                      <input type="number" name="item_qty" id="item_qty" class="form-control input-sm" placeholder="Item_Qty" required>
                     </div>
                   </div>
                 </div>
                 
-                <input type="submit" value="Add Item" onclick="expandForm()" class="btn btn-info btn-block">
-              
+                <input type="button" id="add" value="Add Item" class="btn btn-info btn-block">
               </form>
             </div>
           </div>
@@ -135,7 +117,7 @@
                   <th>Item_StaffCheckName</th>
                 </tr>
               </thead>
-              <tbody>
+              <tbody id="itemtbody">
                 <tr>
                   <td>0001</td>
                   <td>Static_Test_Item</td>
@@ -149,8 +131,6 @@
                 </tr>
               </tbody>
             </table>
-
-              <p><a class="btn" href="#">View details &raquo;</a></p>
             </div>
         </div>
 
@@ -158,7 +138,16 @@
       </div>
     </div>
 
-
+  <script type="text/javascript">
+    var remote = require('electron').remote;
+    document.addEventListener('keydown', function (e) {
+      if (e.which === 123) {
+        remote.getCurrentWindow().webContents.openDevTools();
+      } else if (e.which === 116) {
+        location.reload();
+      }
+    });
+  </script>
 
   </body>
 
