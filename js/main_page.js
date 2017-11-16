@@ -20,9 +20,12 @@ window.onload = function() {
     var x = document.getElementById("formDiv");
     
     if(item_code.value && item_name.value && item_price.value && item_arrivalDate.value && item_minRestockQty.value && item_minRestockQty.value && item_qty.value && item_staffCheckName.value){
-      successBox.innerHTML = '<div class="alert alert-success"><strong>Success!</strong> New item has been added.</div>';
+      successBox.innerHTML = '<div class="alert alert-success"><strong>Success!</strong> New item has "'+ item_name.value + '" been added.</div>';
       errorBox.innerHTML = '';
       database.addItem(item_code.value, item_name.value, item_price.value, item_arrivalDate.value, item_minRestockQty.value, item_minRestockQty.value, item_qty.value, item_staffCheckName.value);
+      $("#successBox").fadeTo(2000, 500).slideUp(500, function(){
+        $("#successBox").slideUp(500);
+      });
       // reset fields
       item_code.value = '';
       item_name.value = '';
@@ -32,7 +35,7 @@ window.onload = function() {
       item_maxStockQty.value = '';
       item_staffCheckName.value = '';
       item_qty.value = '';
-      x.style.display = "none";
+      $('#addnewitem').collapse('hide');
       populateTable();
     }else{
       successBox.innerHTML = '';

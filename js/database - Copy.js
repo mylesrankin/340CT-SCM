@@ -39,7 +39,7 @@ exports.deleteItem = function(id) {
     // Do nothing
   });
 }
-/*
+
 var test2 = '';
 
 function checkItem(ic, callback){  
@@ -56,13 +56,13 @@ function checkItem(ic, callback){
 
 ic = String(1)
 
-
 var test = (checkItem('1', function(err, isItem){
     return(isItem)
-}))(); */
+}))();
 
+console.log(test)
 
-checkItem = function(ic, callback){  
+exports.newCheckItem = function(ic, callback){  
   db.find({ item_code: ic}, function(err, docs){
     if(err) return callback(err)
     if(docs.length > 0){
@@ -71,13 +71,7 @@ checkItem = function(ic, callback){
       return callback(null, false)
     }
   });
-}
 
-exports.checkExists = function(ic){
-  checkItem(ic, function(err, docs){
-    if(err) return err;
-    return docs;
-  });
 }
 
 exports.getitem = function(id, x){

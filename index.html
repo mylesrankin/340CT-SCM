@@ -7,6 +7,9 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js" onload="window.$ = window.jQuery = module.exports;"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
+
+  <script type="text/javascript" src="js/main_page.js"></script>
+
 </head>
 <body>
 
@@ -18,22 +21,22 @@
   </div>
 
   <ul class="nav nav-tabs">
-    <li class="active"><a data-toggle="tab" href="#home">Home</a></li>
-    <li><a data-toggle="tab" href="#menu1">Menu 1</a></li>
-    <li><a data-toggle="tab" href="#menu2">Menu 2</a></li>
-    <li><a data-toggle="tab" href="#menu3">Menu 3</a></li>
+    <li class="active"><a data-toggle="tab" href="#home">Manage Stock</a></li>
+    <li><a data-toggle="tab" href="#menu1">View Sales History</a></li>
+    <li><a data-toggle="tab" href="#menu2">View Staff Logs</a></li>
+    <li><a data-toggle="tab" href="#menu3">Execute Order 66</a></li>
   </ul>
 
   <div class="tab-content">
     <div id="home" class="tab-pane fade in active">
         <!-- start of stock management -->
-        <h3> Manage Stock </h3>
         <div style="margin:25px">
         <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#addnewitem" aria-expanded="false" aria-controls="addnewitem">Show/Hide Add New Item</button>
+        <div id="successBox"></div>
       </div>
-          <div id="addnewitem" class="collapse"> <!-- form div -->
+          <div id="addnewitem" class="collapse" style="width:40%"> <!-- form div -->
             <div id="errorBox"></h4></div>
-          <div class="col-xs-12 col-sm-8 col-md-4 col-sm-offset-2 col-md-offset-4">
+          <!-- <div class="col-xs-12 col-sm-8 col-md-4 col-sm-offset-2 col-md-offset-4"> -->
            <div class="panel-body">
               <form role="form">
                 <div class="row">
@@ -90,7 +93,7 @@
                 <input type="button" id="page2" value="Page 2" class="btn btn-info btn-block">
               </form>
             </div>
-          </div>
+          <!-- </div> -->
           </div> <!-- end of form div? -->
 
           <div class="dataTable">
@@ -140,7 +143,7 @@
   </div>
 </div>
 
-
+<!--
 <script type="text/javascript">
     var remote = require('electron').remote;
     document.addEventListener('keydown', function (e) {
@@ -151,6 +154,7 @@
       }
     });
 </script>
+-->
 
 </body>
 </html>
