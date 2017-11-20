@@ -1,9 +1,3 @@
-{"item_code":"111","item_name":"111","item_price":"111","item_arrivalDate":"2017-11-16","item_minRestockQty":"1","item_qty":"11","item_staffCheckName":"11","_id":"2INNxyTyScHDUcmU"}
-{"item_code":"11","item_name":"111","item_price":"1111","item_arrivalDate":"2017-11-08","item_minRestockQty":"111","item_qty":"1","item_staffCheckName":"1111","_id":"7B7HFX4ZdPXFcI5B"}
-{"item_code":"1111","item_name":"111","item_price":"1111","item_arrivalDate":"2017-11-25","item_minRestockQty":"111","item_qty":"11","item_staffCheckName":"1111","_id":"90qdquFpHhdlhCUF"}
-{"item_code":"1","item_name":"111","item_price":"1211","item_arrivalDate":"2017-11-09","item_minRestockQty":"11","item_qty":"1111","item_staffCheckName":"111","_id":"KNPuvcugsvYr2ftX"}
-{"item_code":"001","item_name":"AK47","item_price":"444","item_arrivalDate":"2017-11-11","item_minRestockQty":"444","item_qty":"12","item_staffCheckName":"Me","_id":"M7A2m5taqumLGH0A"}
-{"item_code":"111","item_name":"111","item_price":"1111","item_arrivalDate":"2017-11-04","item_minRestockQty":"111","item_qty":"1","item_staffCheckName":"1111","_id":"Mo8hG8OVAutHzhcT"}
-{"item_code":"0004","item_name":"M4A1","item_price":"339.99","item_arrivalDate":"2017-11-19","item_minRestockQty":"5","item_qty":"4","item_staffCheckName":"Myles","_id":"OLFM7hxNb8uxjTl4"}
-{"item_code":"11","item_name":"1111","item_price":"111","item_arrivalDate":"2017-10-31","item_minRestockQty":"11","item_qty":"11","item_staffCheckName":"111","_id":"bSKHGgUtZlFrZuAx"}
-{"item_code":"111","item_name":"11","item_price":"1111","item_arrivalDate":"2017-11-19","item_minRestockQty":"1111","item_qty":"1111","item_staffCheckName":"111","_id":"q8uoiyoQ7bw8Xrrr"}
+{"item_code":"1","item_name":"5","item_price":"2","item_arrivalDate":"2017-11-09","item_minRestockQty":"3","item_qty":"6","item_maxStockQty":"3","item_staffCheckName":"7","_id":"VfvTXy0BT4ghYzuQ"}
+{"item_code":"1222","item_name":"5","item_price":"2","item_arrivalDate":"2017-11-03","item_minRestockQty":"3","item_qty":"67","item_maxStockQty":"3","item_staffCheckName":"7","_id":"lwx1mCDJm2yz8vwK"}
+{"item_code":"123123","item_name":"4444","item_price":"1231","item_arrivalDate":"2017-11-23","item_minRestockQty":"23123","item_qty":"4444","item_maxStockQty":"23123","item_staffCheckName":"444","_id":"wxwbt3DNIELMuTDY"}

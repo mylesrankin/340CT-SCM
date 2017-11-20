@@ -97,7 +97,7 @@ function populateTable() {
       tableBody += '  <td>' + status + ' </td>';
       tableBody += '  <td>' + items[i].item_staffCheckName + '</td>';
       tableBody += '  <td><button type="button" class="btn" value="Delete" onclick="deleteItem(\'' + items[i]._id + '\')">Delete</button></td>';
-      /*tableBody += '  <td>\
+      tableBody += '  <td>\
                                   <!-- Trigger the modal with a button -->\
                             <button type="button" class="btn" data-toggle="modal" data-target="#'+ items[i].item_name + '">Update</button>\
                             \
@@ -121,7 +121,7 @@ function populateTable() {
                                           <div class="row">\
                                             <div class="col-xs-6 col-sm-6 col-md-6">\
                                               <div class="form-group">\
-                                                <input type="number" name="item_code" id="item_code" class="form-control input-sm" placeholder="Item_Code" value="' + items[i].item_code + '">\
+                                                <input type="number" name="item_code" id="item_code" class="form-control input-sm" placeholder="Item_Code">\
                                               </div>\
                                             </div>\
                                             <div class="col-xs-6 col-sm-6 col-md-6">\
@@ -133,40 +133,40 @@ function populateTable() {
                                           <div class="row">\
                                             <div class="col-xs-6 col-sm-6 col-md-6">\
                                               <div class="form-group">\
-                                                <input type="number" name="item_price" id="item_price" class="form-control input-sm" placeholder="Item_Price" value="' + items[i].item_price + '">\
+                                                <input type="text" name="item_price" id="item_price" class="form-control input-sm" placeholder="Item_Price">\
                                               </div>\
                                             </div>\
                                             <div class="col-xs-6 col-sm-6 col-md-6">\
                                               <div class="form-group">\
-                                               <input type="date" name="item_arrivalDate" id="item_arrivalDate" class="form-control input-sm" placeholder="Item_ArrivalDate" value="' + items[i].item_arrivalDate + '">\
+                                               <input type="date" name="item_arrivalDate" id="item_arrivalDate" class="form-control input-sm" placeholder="Item_ArrivalDate" value="">\
                                               </div>\
                                             </div>\
                                           </div>\
                                           <div class="row">\
                                             <div class="col-xs-6 col-sm-6 col-md-6">\
                                               <div class="form-group">\
-                                                <input type="number" name="item_minRestockQty" id="item_minRestockQty" class="form-control input-sm" placeholder="Item_MinRestockQty" value="' + items[i].item_minRestockQty + '">\
+                                                <input type="number" name="item_minRestockQty" id="item_minRestockQty" class="form-control input-sm" placeholder="Item_MinRestockQty">\
                                               </div>\
                                             </div>\
                                             <div class="col-xs-6 col-sm-6 col-md-6">\
                                               <div class="form-group">\
-                                                <input type="number" name="item_maxStockQty" id="item_maxStockQty" class="form-control input-sm" placeholder="Item_MaxStockQty" required="true" value="' + items[i].item_maxStockQty + '">\
+                                                <input type="number" name="item_maxStockQty" id="item_maxStockQty" class="form-control input-sm" placeholder="Item_MaxStockQty" required="true">\
                                               </div>\
                                             </div>\
                                           </div>\
                                           <div class="row">\
                                             <div class="col-xs-6 col-sm-6 col-md-6">\
                                               <div class="form-group">\
-                                                <input type="text" name="item_staffCheckName" id="item_staffCheckName" class="form-control input-sm" placeholder="Item_StaffCheckName" value="' + items[i].item_staffCheckName + '">\
+                                                <input type="text" name="item_staffCheckName" id="item_staffCheckName" class="form-control input-sm" placeholder="Item_StaffCheckName">\
                                               </div>\
                                             </div>\
                                             <div class="col-xs-6 col-sm-6 col-md-6">\
                                               <div class="form-group">\
-                                                <input type="number" name="item_qty" id="item_qty" class="form-control input-sm" placeholder="Item_Qty" value="' + items[i].item_qty + '" required>\
+                                                <input type="number" name="item_qty" id="item_qty" class="form-control input-sm" placeholder="Item_Qty" required>\
                                               </div>\
                                             </div>\
                                           </div>\
-                                          <input type="button" id="add2" value="Update Item" class="btn btn-info btn-block">\
+                                          <input type="button" id="add" value="Update Item" class="btn btn-info btn-block">\
                                         </form>\
                                       </div>\
                                     <!-- </div> -->\
@@ -180,7 +180,7 @@ function populateTable() {
                               </div>\
                             </div>\
                             \
-                      </td>'; */
+                      </td>'; 
       tableBody += '</tr>';
     }
 
