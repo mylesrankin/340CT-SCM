@@ -18,7 +18,7 @@ window.onload = function() {
     var errorBox = document.getElementById('errorBox');
     var sucessBox = document.getElementById('successBox');
     var x = document.getElementById("formDiv");
-    
+
     if(item_code.value && item_name.value && item_price.value && item_arrivalDate.value && item_minRestockQty.value && item_maxStockQty.value && item_qty.value && item_staffCheckName.value){
       errorBox.innerHTML = '';
 
@@ -32,7 +32,7 @@ window.onload = function() {
             });
           }else{
             successBox.innerHTML = '<div class="alert alert-success"><strong>Success!</strong> New item has "'+ item_code.value + '" been added.</div>';
-            database.addItem(item_code.value, item_name.value, item_price.value, item_arrivalDate.value, item_minRestockQty.value, item_minRestockQty.value, item_maxStockQty.value, item_qty.value, item_staffCheckName.value);
+            database.addItem(item_code.value, item_name.value, item_price.value, item_arrivalDate.value, item_minRestockQty.value, item_qty.value, item_maxStockQty.value, item_staffCheckName.value);
             $("#successBox").fadeTo(2000, 500).slideUp(500, function(){
               $("#successBox").slideUp(500);
             });
@@ -97,7 +97,7 @@ function populateTable() {
       tableBody += '  <td>' + status + ' </td>';
       tableBody += '  <td>' + items[i].item_staffCheckName + '</td>';
       tableBody += '  <td><button type="button" class="btn" value="Delete" onclick="deleteItem(\'' + items[i]._id + '\')">Delete</button></td>';
-      /*tableBody += '  <td>\
+      tableBody += '  <td>\
                                   <!-- Trigger the modal with a button -->\
                             <button type="button" class="btn" data-toggle="modal" data-target="#'+ items[i].item_name + '">Update</button>\
                             \
@@ -121,19 +121,19 @@ function populateTable() {
                                           <div class="row">\
                                             <div class="col-xs-6 col-sm-6 col-md-6">\
                                               <div class="form-group">\
-                                                <input type="number" name="item_code" id="item_code" class="form-control input-sm" placeholder="Item_Code" value="' + items[i].item_code + '">\
+                                                <input type="number" name="item_code" id="1item_code" class="form-control input-sm" placeholder="Item_Code" value="' + items[i].item_code + '">\
                                               </div>\
                                             </div>\
                                             <div class="col-xs-6 col-sm-6 col-md-6">\
                                               <div class="form-group">\
-                                                <input type="text" name="item_name" id="item_name" class="form-control input-sm" placeholder="Item_Name" value="' + items[i].item_name + '">\
+                                                <input type="text" name="item_name" id="1item_name" class="form-control input-sm" placeholder="Item_Name" value="' + items[i].item_name + '">\
                                               </div>\
                                             </div>\
                                           </div>\
                                           <div class="row">\
                                             <div class="col-xs-6 col-sm-6 col-md-6">\
                                               <div class="form-group">\
-                                                <input type="number" name="item_price" id="item_price" class="form-control input-sm" placeholder="Item_Price" value="' + items[i].item_price + '">\
+                                                <input type="number" name="item_price" id="1item_price" class="form-control input-sm" placeholder="Item_Price" value="' + items[i].item_price + '">\
                                               </div>\
                                             </div>\
                                             <div class="col-xs-6 col-sm-6 col-md-6">\
@@ -145,7 +145,7 @@ function populateTable() {
                                           <div class="row">\
                                             <div class="col-xs-6 col-sm-6 col-md-6">\
                                               <div class="form-group">\
-                                                <input type="number" name="item_minRestockQty" id="item_minRestockQty" class="form-control input-sm" placeholder="Item_MinRestockQty" value="' + items[i].item_minRestockQty + '">\
+                                                <input type="number" name="item_minRestockQty" id="1item_minRestockQty" class="form-control input-sm" placeholder="Item_MinRestockQty" value="' + items[i].item_minRestockQty + '">\
                                               </div>\
                                             </div>\
                                             <div class="col-xs-6 col-sm-6 col-md-6">\
@@ -160,8 +160,9 @@ function populateTable() {
                                                 <input type="text" name="item_staffCheckName" id="item_staffCheckName" class="form-control input-sm" placeholder="Item_StaffCheckName" value="' + items[i].item_staffCheckName + '">\
                                               </div>\
                                             </div>\
-                                            <div class="col-xs-6 col-sm-6 col-md-6">\
+                                            <div class="col-xs-4 col-sm-4 col-md-6">\
                                               <div class="form-group">\
+                                              <label for="item_qty">Email address</label>\
                                                 <input type="number" name="item_qty" id="item_qty" class="form-control input-sm" placeholder="Item_Qty" value="' + items[i].item_qty + '" required>\
                                               </div>\
                                             </div>\
@@ -180,7 +181,7 @@ function populateTable() {
                               </div>\
                             </div>\
                             \
-                      </td>'; */
+                      </td>'; 
       tableBody += '</tr>';
     }
 

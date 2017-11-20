@@ -3,8 +3,8 @@ var Datastore = require('nedb');
 db = new Datastore({ filename: 'db/items.db', autoload: true });
 
 // Adds a person
-exports.addItem = function(item_code, item_name, item_price, item_arrivalDate, item_minRestockQty, item_maxStockQty, item_qty, item_staffCheckName) {
-  console.log(item_staffCheckName);
+exports.addItem = function(item_code, item_name, item_price, item_arrivalDate, item_minRestockQty, item_qty, item_maxStockQty, item_staffCheckName) {
+
   var item = {
     'item_code': item_code,
     'item_name': item_name,
