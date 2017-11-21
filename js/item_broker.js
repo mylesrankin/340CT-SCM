@@ -34,10 +34,23 @@ exports.getItems = function(x) {
   });
 }
 
+
+exports.updateItemStock = function(id, newqty){
+  db.update({item_code: id},{$inc: {item_qty: newqty}}, function(err, num){
+    // Nothing
+  });
+}
+
 // Deletes a person
 exports.deleteItem = function(id) {
 
   db.remove({ _id: id }, {}, function(err, numRemoved) {
+    // Do nothing
+  });
+}
+
+exports.updateItem = function(item_code, newdata){
+  db.update({item_code: item_code}, newdata, function(err,numReplaced){
     // Do nothing
   });
 }

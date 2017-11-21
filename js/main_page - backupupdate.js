@@ -1,11 +1,10 @@
-const item_broker = require('./js/item_broker');
+const database = require('./js/database');
 const { remote } = require('electron')
 const path = require('path')
 const url = require('url')
 
 window.onload = function() {
   populateTable();
-  populateSelectList()
   document.getElementById('add').addEventListener('click', () => {
     var item_code = document.getElementById('item_code');
     var item_name = document.getElementById('item_name');
@@ -22,7 +21,7 @@ window.onload = function() {
     if(item_code.value && item_name.value && item_price.value && item_arrivalDate.value && item_minRestockQty.value && item_maxStockQty.value && item_qty.value && item_staffCheckName.value){
       errorBox.innerHTML = '';
 
-      item_broker.getItem(item_code.value, function(err, docs){
+      database.getItem(item_code.value, function(err, docs){
           if(docs.length>0){
             console.log("exists")
             successBox.innerHTML = '';
@@ -32,7 +31,7 @@ window.onload = function() {
             });
           }else{
             successBox.innerHTML = '<div class="alert alert-success"><strong>Success!</strong> New item has "'+ item_code.value + '" been added.</div>';
-            item_broker.addItem(item_code.value, item_name.value, item_price.value, item_arrivalDate.value, item_minRestockQty.value, item_qty.value, item_maxStockQty.value, item_staffCheckName.value);
+            database.addItem(item_code.value, item_name.value, item_price.value, item_arrivalDate.value, item_minRestockQty.value, item_qty.value, item_maxStockQty.value, item_staffCheckName.value);
             $("#successBox").fadeTo(2000, 500).slideUp(500, function(){
               $("#successBox").slideUp(500);
             });
@@ -47,7 +46,7 @@ window.onload = function() {
             item_qty.value = '';
             $('#addnewitem').collapse('hide');
             populateTable();
-            populateSelectList()
+
           }
       });
 
@@ -56,9 +55,7 @@ window.onload = function() {
       errorBox.innerHTML = '<div class="alert alert-warning"><strong>Error:</strong> One or more fields are empty!</div>';
     };
 
-    document.getElementById('ns_item_code').addEventListener('change', () => {
-    	console.log('change detected');
-    });
+
 
   });
 
@@ -83,37 +80,20 @@ window.onload = function() {
 }
 
 function updateItem(){
-	var item_code = document.getElementById('updateitem_code').value;
-    var item_name = document.getElementById('updateitem_name').value;
-    var item_price = document.getElementById('updateitem_price').value;
-    var item_arrivalDate = document.getElementById('updateitem_arrivalDate').value;
-    var item_minRestockQty = document.getElementById('updateitem_minRestockQty').value;
-    var item_qty = document.getElementById('updateitem_qty').value;
-    var item_maxStockQty = document.getElementById('updateitem_maxStockQty').value;
-    var item_staffCheckName = document.getElementById('updateitem_staffCheckName').value;
-
-  	var item = {
-	    'item_code': item_code,
-	    'item_name': item_name,
-	    'item_price': item_price,
-	    'item_arrivalDate': item_arrivalDate,
-	    'item_minRestockQty': item_minRestockQty,
-	    'item_qty': item_qty,
-	    'item_maxStockQty': item_maxStockQty,
-	    'item_staffCheckName': item_staffCheckName
-    	};
-   	var ic = String(item_code)
-    item_broker.updateItem(ic, item);
-    console.log('item updated')
-    modalName = '#modal' + item_code
-    $(modalName).modal('hide');
-    populateTable()
-
+	var item_code = document.getElementById('updateitem_code');
+    var uitem_name = document.getElementById('updateitem_name');
+    var item_price = document.getElementById('updateitem_price');
+    var item_arrivalDate = document.getElementById('updateitem_arrivalDate');
+    var item_minRestockQty = document.getElementById('updateitem_minRestockQty');
+    var item_qty = document.getElementById('updateitem_qty');
+    var item_maxStockQty = document.getElementById('updateitem_maxStockQty');
+    var item_staffCheckName = document.getElementById('updateitem_staffCheckName');
+    console.log(uitem_name.value);
 }
 
 function populateTable() {
   // Retrieve the persons
-  item_broker.getItems(function(items) {
+  database.getItems(function(items) {
     // Generate the table body
     var tableBody = '';
     for (i = 0; i < items.length; i++) {
@@ -132,33 +112,19 @@ function populateTable() {
       tableBody += '  <td>' + status + ' </td>';
       tableBody += '  <td>' + items[i].item_staffCheckName + '</td>';
       tableBody += '  <td><button type="button" class="btn" value="Delete" onclick="deleteItem(\'' + items[i]._id + '\')">Delete</button></td>';
-      tableBody += '  <td><button type="button" class="btn" data-toggle="modal" onclick="showUpdate(\'' + items[i].item_code + '\')" data-target="#modal'+ items[i].item_code + '">Update</button></td>'; 
-      tableBody += '  <td><div id="update'+ items[i].item_code +'"></div></td>';
-      tableBody += '</tr>';
-    }
-
-    // Fill the table content
-    document.getElementById('itemtbody').innerHTML = tableBody;
-  });
-}
-
-
-function showUpdate(id){
-	var upd = 'update'+ id
-	var mdl = 'modal'+ id
-	console.log(upd)
-	var updatediv = document.getElementById(upd)
-	updatediv.innerHTML = '<td>\
+      tableBody += '  <td>\
                                   <!-- Trigger the modal with a button -->\
+                            <button type="button" class="btn" data-toggle="modal" data-target="#'+ items[i].item_name + '">Update</button>\
                             \
                             <!-- Modal -->\
-                            <div id="modal' + id + '" class="modal fade" role="dialog">\
+                            <div id="'+ items[i].item_name + '" class="modal fade" role="dialog">\
                               <div class="modal-dialog">\
+                            \
                                 <!-- Modal content-->\
                                 <div class="modal-content">\
                                   <div class="modal-header">\
                                     <button type="button" class="close" data-dismiss="modal">&times;</button>\
-                                    <h4 class="modal-title">Update Item: ' + id + '</h4>\
+                                    <h4 class="modal-title">Update Item: ' + items[i].item_name + '</h4>\
                                   </div>\
                                   <div class="modal-body">\
                                   \ <!-- Modal Content --> \
@@ -172,13 +138,13 @@ function showUpdate(id){
                                             <div class="col-xs-6 col-sm-6 col-md-6">\
                                               <div class="form-group">\
                                               <label for="item_qty">Item_Code</label>\
-                                                <input type="number" name="item_code" id="updateitem_code" class="form-control input-sm" placeholder="Item_Code" disabled>\
+                                                <input type="number" name="item_code" id="updateitem_code" class="form-control input-sm" placeholder="Item_Code" value="' + items[i].item_code + '">\
                                               </div>\
                                             </div>\
                                             <div class="col-xs-6 col-sm-6 col-md-6">\
                                               <div class="form-group">\
                                               <label for="item_qty">Item_Name</label>\
-                                                <input type="text" name="item_name" id="updateitem_name" class="form-control input-sm" placeholder="Item_Name">\
+                                                <input type="text" name="item_name" id="updateitem_name" class="form-control input-sm" placeholder="Item_Name" value="' + items[i].item_name + '">\
                                               </div>\
                                             </div>\
                                           </div>\
@@ -186,13 +152,13 @@ function showUpdate(id){
                                             <div class="col-xs-6 col-sm-6 col-md-6">\
                                               <div class="form-group">\
                                               <label for="item_qty">Item_Price</label>\
-                                                <input type="number" name="item_price" id="updateitem_price" class="form-control input-sm" placeholder="Item_Price">\
+                                                <input type="number" name="item_price" id="updateitem_price" class="form-control input-sm" placeholder="Item_Price" value="' + items[i].item_price + '">\
                                               </div>\
                                             </div>\
                                             <div class="col-xs-6 col-sm-6 col-md-6">\
                                               <div class="form-group">\
                                               <label for="item_qty">Item_ArrivalDate</label>\
-                                               <input type="date" name="item_arrivalDate" id="updateitem_arrivalDate" class="form-control input-sm" placeholder="Item_ArrivalDate">\
+                                               <input type="date" name="item_arrivalDate" id="updateitem_arrivalDate" class="form-control input-sm" placeholder="Item_ArrivalDate" value="' + items[i].item_arrivalDate + '">\
                                               </div>\
                                             </div>\
                                           </div>\
@@ -200,13 +166,13 @@ function showUpdate(id){
                                             <div class="col-xs-6 col-sm-6 col-md-6">\
                                               <div class="form-group">\
                                               <label for="item_qty">Item_MinRestockQty</label>\
-                                                <input type="number" name="item_minRestockQty" id="updateitem_minRestockQty" class="form-control input-sm" placeholder="Item_MinRestockQty">\
+                                                <input type="number" name="item_minRestockQty" id="updateitem_minRestockQty" class="form-control input-sm" placeholder="Item_MinRestockQty" value="' + items[i].item_minRestockQty + '">\
                                               </div>\
                                             </div>\
                                             <div class="col-xs-6 col-sm-6 col-md-6">\
                                               <div class="form-group">\
                                               <label for="item_qty">Item_MaxStockQty</label>\
-                                                <input type="number" name="item_maxStockQty" id="updateitem_maxStockQty" class="form-control input-sm" placeholder="Item_MaxStockQty" required="true">\
+                                                <input type="number" name="item_maxStockQty" id="updateitem_maxStockQty" class="form-control input-sm" placeholder="Item_MaxStockQty" required="true" value="' + items[i].item_maxStockQty + '">\
                                               </div>\
                                             </div>\
                                           </div>\
@@ -214,13 +180,13 @@ function showUpdate(id){
                                             <div class="col-xs-6 col-sm-6 col-md-6">\
                                               <div class="form-group">\
                                               <label for="item_qty">Item_StaffCheckName</label>\
-                                                <input type="text" name="item_staffCheckName" id="updateitem_staffCheckName" class="form-control input-sm" placeholder="Item_StaffCheckName">\
+                                                <input type="text" name="item_staffCheckName" id="updateitem_staffCheckName" class="form-control input-sm" placeholder="Item_StaffCheckName" value="' + items[i].item_staffCheckName + '">\
                                               </div>\
                                             </div>\
                                             <div class="col-xs-4 col-sm-4 col-md-6">\
                                               <div class="form-group">\
                                               <label for="item_qty">Item_Qty</label>\
-                                                <input type="number" name="item_qty" id="updateitem_qty" class="form-control input-sm" placeholder="Item_Qty">\
+                                                <input type="number" name="item_qty" id="updateitem_qty" class="form-control input-sm" placeholder="Item_Qty" value="' + items[i].item_qty + '" required>\
                                               </div>\
                                             </div>\
                                           </div>\
@@ -238,42 +204,21 @@ function showUpdate(id){
                               </div>\
                             </div>\
                             \
-                      </td>';
-                      item_broker.getItem(id, function(err,docs){
-                      	console.log(docs[0].item_code)
-                      	document.getElementById('updateitem_code').value = docs[0].item_code
-                      	document.getElementById('updateitem_name').value = docs[0].item_name
-                      	document.getElementById('updateitem_price').value = docs[0].item_price
-                      	document.getElementById('updateitem_arrivalDate').value = docs[0].item_arrivalDate
-                      	document.getElementById('updateitem_minRestockQty').value = docs[0].item_minRestockQty
-                      	document.getElementById('updateitem_maxStockQty').value = docs[0].item_maxStockQty
-                      	document.getElementById('updateitem_staffCheckName').value = docs[0].item_staffCheckName
-                      	document.getElementById('updateitem_qty').value = docs[0].item_qty
-                      })        
+                      </td>'; 
+      tableBody += '</tr>';
+    }
+
+    // Fill the table content
+    document.getElementById('itemtbody').innerHTML = tableBody;
+  });
 }
 
-// Deletes an item
+// Deletes a person
 function deleteItem(id) {
 
-  // Delete the item from the database
-  item_broker.deleteItem(id);
+  // Delete the person from the database
+  database.deleteItem(id);
 
+  // Repopulate the table
   populateTable();
-}
-
-
-
-function populateSelectList(){
-	var selectListHTML = '';
-	item_broker.getItems(function(items){
-		for (i = 0; i < items.length; i++) {
-			selectListHTML+= '<option>'+ items[i].item_code +'</option>'
-		};
-	var selectList = document.getElementById('ns_item_code')
-	selectList.innerHTML = selectListHTML;
-	});
-}
-
-function test(){
-	console.log("Test");
 }

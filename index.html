@@ -22,7 +22,7 @@
 
   <ul class="nav nav-tabs">
     <li class="active"><a data-toggle="tab" href="#home">Manage Stock</a></li>
-    <li><a data-toggle="tab" href="#newsale">Add a new sale</a></li>
+    <li><a data-toggle="tab" href="#newsale" onclick="populateSelectList()">Add a new sale</a></li>
     <li><a data-toggle="tab" href="#saleshistory">View Sales History</a></li>
     <li><a data-toggle="tab" href="#menu2">View Staff Logs</a></li>
     <li><a data-toggle="tab" href="#menu3">Execute Order 66</a></li>
@@ -141,99 +141,74 @@
 
 		<!-- Text input-->
 		<div class="form-group">
-		  <label class="col-md-4 control-label" for="product_id">PRODUCT ID</label>  
+		  <label class="col-md-4 control-label" for="ns_item_code">Item_Code:</label>  
 		  <div class="col-md-4">
-		  <input id="product_id" name="product_id" placeholder="PRODUCT ID" class="form-control input-md" required="" type="text">
+      <select class="form-control" id="ns_item_code">
+        <div id="ns_item_code_options"></div>
+        <option>SELECT LIST WAS NOT LOADED</option>
+      </select>
+		  </div>
+		</div>
+
+		<!-- Text input-->
+		<div class="form-group">
+		  <label class="col-md-4 control-label" for="ns_item_name">Item_Name:</label>  
+		  <div class="col-md-4">
+		  <input id="ns_item_name" name="item_name" placeholder="item_name" class="form-control input-md" required="" type="text" disabled>
 		    
 		  </div>
 		</div>
 
 		<!-- Text input-->
 		<div class="form-group">
-		  <label class="col-md-4 control-label" for="customer_id">CUSTOMER ID</label>  
+		  <label class="col-md-4 control-label" for="ns_item_price">Item_Price:</label>  
 		  <div class="col-md-4">
-		  <input id="customer_id" name="customer_id" placeholder="CUSTOMER ID" class="form-control input-md" required="" type="text">
+		  <input id="ns_item_price" name="item_price" placeholder="item_price" class="form-control input-md" required="" type="text" disabled>
 		    
 		  </div>
 		</div>
 
 		<!-- Text input-->
 		<div class="form-group">
-		  <label class="col-md-4 control-label" for="customer_name">CUSTOMER NAME</label>  
+		  <label class="col-md-4 control-label" for="ns_product_price">Qty_Sold:</label>  
 		  <div class="col-md-4">
-		  <input id="customer_name" name="customer_name" placeholder="CUSTOMER NAME" class="form-control input-md" required="" type="text">
+		  <input id="ns_qty_sold" name="product_price" placeholder="PRODUCT PRICE" class="form-control input-md" required="" type="text">
 		    
 		  </div>
 		</div>
 
 		<!-- Text input-->
 		<div class="form-group">
-		  <label class="col-md-4 control-label" for="product_price">PRODUCT PRICE</label>  
+		  <label class="col-md-4 control-label" for="ns_total_price">Total_Price:</label>  
 		  <div class="col-md-4">
-		  <input id="product_price" name="product_price" placeholder="PRODUCT PRICE" class="form-control input-md" required="" type="text">
+		  <input id="ns_total_price" name="total_price" placeholder="total_price" class="form-control input-md" required="" type="text" disabled>
 		    
 		  </div>
 		</div>
 
 		<!-- Text input-->
 		<div class="form-group">
-		  <label class="col-md-4 control-label" for="quantity_purchased">QUANTITY PURCHASED</label>  
+		  <label class="col-md-4 control-label" for="ns_customer_name">Customer_Name:</label>  
 		  <div class="col-md-4">
-		  <input id="quantity_purchased" name="quantity_purchased" placeholder="QUANTITY PURCHASED" class="form-control input-md" required="" type="text">
+		  <input id="ns_customer_name" name="ns_customer_name" placeholder="customer_name" class="form-control input-md" required="" type="text">
 		    
 		  </div>
 		</div>
 
 		<!-- Text input-->
 		<div class="form-group">
-		  <label class="col-md-4 control-label" for="percentage_discount">PERCENTAGE DISCOUNT</label>  
+		  <label class="col-md-4 control-label" for="ns_cashier_name">Cashier_Name:</label>  
 		  <div class="col-md-4">
-		  <input id="percentage_discount" name="percentage_discount" placeholder="PERCENTAGE DISCOUNT" class="form-control input-md" required="" type="text">
+		  <input id="ns_cashier_name" name="cashier_name" placeholder="cashier_name" class="form-control input-md" required="" type="text">
 		    
 		  </div>
 		</div>
 
 		<!-- Text input-->
 		<div class="form-group">
-		  <label class="col-md-4 control-label" for="confirmed_purchase">CONFIRMED PURCHASE</label>  
+		  <label class="col-md-4 control-label" for="ns_sale_date">Sale_Date</label>  
 		  <div class="col-md-4">
-		  <input id="confirmed_purchase" name="confirmed_purchase" placeholder="CONFIRMED PURCHASE" class="form-control input-md" required="" type="text">
-		    
-		  </div>
-		</div>
-
-		<!-- Text input-->
-		<div class="form-group">
-		  <label class="col-md-4 control-label" for="payment_mode">PAYMENT MODE</label>  
-		  <div class="col-md-4">
-		  <input id="payment_mode" name="payment_mode" placeholder="PAYMENT MODE" class="form-control input-md" required="" type="text">
-		    
-		  </div>
-		</div>
-
-		<!-- Text input-->
-		<div class="form-group">
-		  <label class="col-md-4 control-label" for="purchase_date">PURCHASE DATE</label>  
-		  <div class="col-md-4">
-		  <input id="purchase_date" name="purchase_date" placeholder="PURCHASE DATE" class="form-control input-md" required="" type="text">
-		    
-		  </div>
-		</div>
-
-		<!-- Text input-->
-		<div class="form-group">
-		  <label class="col-md-4 control-label" for="shipping_mode">SHIPPING MODE</label>  
-		  <div class="col-md-4">
-		  <input id="shipping_mode" name="shipping_mode" placeholder="SHIPPING MODE" class="form-control input-md" required="" type="text">
-		    
-		  </div>
-		</div>
-
-		<!-- Text input-->
-		<div class="form-group">
-		  <label class="col-md-4 control-label" for="comment">COMMENT</label>  
-		  <div class="col-md-4">
-		  <input id="comment" name="comment" placeholder="COMMENT" class="form-control input-md" required="" type="text">
+      <input type="date" name="sale_date" id="ns_sale_date" class="form-control input-sm" placeholder="sale_date">
 		    
 		  </div>
 		</div>
