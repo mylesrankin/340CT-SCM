@@ -4,8 +4,25 @@ const path = require('path')
 const url = require('url')
 
 window.onload = function() {
-  populateTable();
-  populateSelectList()
+    populateTable();
+  	populateSelectList();
+
+  	// Set add new sale date input to todays date
+  	var sale_date = document.getElementById('ns_sale_date')
+  	var today = new Date();
+	var dd = today.getDate();
+	var mm = today.getMonth()+1; //January is 0!
+	var yyyy = today.getFullYear();
+	if(dd<10){
+	    dd='0'+dd;
+	} 
+	if(mm<10){
+	    mm='0'+mm;
+	} 
+
+	var today = yyyy+'-'+mm+'-'+dd;
+  	sale_date.value = today
+
   document.getElementById('add').addEventListener('click', () => {
     var item_code = document.getElementById('item_code');
     var item_name = document.getElementById('item_name');
@@ -47,7 +64,7 @@ window.onload = function() {
             item_qty.value = '';
             $('#addnewitem').collapse('hide');
             populateTable();
-            populateSelectList()
+            populateSelectList();
           }
       });
 
@@ -55,10 +72,6 @@ window.onload = function() {
       successBox.innerHTML = '';
       errorBox.innerHTML = '<div class="alert alert-warning"><strong>Error:</strong> One or more fields are empty!</div>';
     };
-
-    document.getElementById('ns_item_code').addEventListener('change', () => {
-    	console.log('change detected');
-    });
 
   });
 
@@ -80,6 +93,51 @@ window.onload = function() {
         location.reload();
       }
     });
+
+
+  document.getElementById('ns_item_code').addEventListener('change', () => {
+  	var item_code = document.getElementById('ns_item_code')
+  	var item_name = document.getElementById('ns_item_name')
+  	var item_price = document.getElementById('ns_item_price')
+  	
+  	item_broker.getItem(item_code.value, function(err,docs){
+  		console.log(docs);
+  		item_name.value = docs[0].item_name;
+  		item_price.value = docs[0].item_price
+  	});
+
+    });
+
+  document.getElementById('ns_qty_sold').addEventListener('change', () => {
+  	var qty_sold = document.getElementById('ns_qty_sold')
+  	var item_price = document.getElementById('ns_item_price')
+  	var total_price = document.getElementById('ns_total_price')
+
+  	total_price.value = '£'+ item_price.value * qty_sold.value
+
+  });
+
+  /*
+  document.getElementById('ns_today').addEventListener('click', () => {
+  	var sale_date = document.getElementById('ns_sale_date')
+  	var today = new Date();
+	var dd = today.getDate();
+	var mm = today.getMonth()+1; //January is 0!
+
+	var yyyy = today.getFullYear();
+	if(dd<10){
+	    dd='0'+dd;
+	} 
+	if(mm<10){
+	    mm='0'+mm;
+	} 
+	var today = yyyy+'-'+mm+'-'+dd;
+
+  	sale_date.value = today
+
+  });
+  */
+
 }
 
 function updateItem(){
@@ -264,7 +322,7 @@ function deleteItem(id) {
 
 
 function populateSelectList(){
-	var selectListHTML = '';
+	var selectListHTML = '<option value="" disabled selected> Select an Item_Code </option>';
 	item_broker.getItems(function(items){
 		for (i = 0; i < items.length; i++) {
 			selectListHTML+= '<option>'+ items[i].item_code +'</option>'
