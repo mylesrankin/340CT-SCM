@@ -17,6 +17,7 @@ window.onload = function() {
       }
     });
 
+    // Populate initial dynamic HTML
     populateItemTable();
   	populateSelectList();
     populateSalesHistoryTable();
