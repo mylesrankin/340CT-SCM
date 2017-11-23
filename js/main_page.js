@@ -287,8 +287,8 @@ function populateItemTable() {
       tableBody += '  <td>' + items[i].item_maxStockQty + '</td>';
       tableBody += '  <td>' + status + ' </td>';
       tableBody += '  <td>' + items[i].item_staffCheckName + '</td>';
-      tableBody += '  <td><button type="button" class="btn" value="Delete" onclick="deleteItem(\'' + items[i]._id + '\')">Delete</button></td>';
-      tableBody += '  <td><button type="button" class="btn" data-toggle="modal" onclick="showUpdate(\'' + items[i].item_code + '\')" data-target="#modal'+ items[i].item_code + '">Update</button></td>'; 
+      tableBody += '  <td><button type="button" class="btn" value="Delete" onclick="deleteItem(\'' + items[i]._id + '\')"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span> Delete</button></td>';
+      tableBody += '  <td><button type="button" class="btn" data-toggle="modal" onclick="showUpdate(\'' + items[i].item_code + '\')" data-target="#modal'+ items[i].item_code + '"><span class="glyphicon glyphicon-repeat" aria-hidden="true"></span> Update</button></td>'; 
       tableBody += '  <td><div id="update'+ items[i].item_code +'"></div></td>';
       tableBody += '</tr>';
     }
