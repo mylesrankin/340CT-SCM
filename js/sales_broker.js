@@ -1,24 +1,23 @@
 // Initialize the database
-var Datastore = require('nedb');
-db = new Datastore({ filename: 'db/sales.db', autoload: true });
+var Datastores = require('nedb');
+dbs = new Datastores({ filename: 'db/sales.db', autoload: true });
 
 // Adds a person
-exports.addSale = function(item_code, item_name, item_price, qty_sold, total_price, customer_name, cashier_name, sale_date) {
+exports.addSale = function(ns_item_code, ns_item_price, ns_qty_sold, ns_total_price, ns_customer_name, ns_cashier_name, ns_sale_date) {
 
   var sale = {
-      'item_code': item_code,
-      'item_name': item_name,
-      'item_price': item_price,
-      'qty_sold': qty_sold,
-      'total_price': total_price,
-      'customer_name': customer_name,
-      'cashier_name': cashier_name,
-      'sale_date': sale_date
+      'item_code': ns_item_code,
+      'item_price': ns_item_price,
+      'qty_sold': ns_qty_sold,
+      'total_price': ns_total_price,
+      'customer_name': ns_customer_name,
+      'cashier_name': ns_cashier_name,
+      'sale_date': ns_sale_date
     };
  
   console.log(sale);
 
-  db.insert(sale, function(err, newDoc) {
+  dbs.insert(sale, function(err, newDoc) {
     // None
   });
 };
@@ -26,7 +25,7 @@ exports.addSale = function(item_code, item_name, item_price, qty_sold, total_pri
 // Returns all persons
 exports.getSales = function(x) {
   // Get all persons from the database
-  db.find({}, function(err, docs) {
+  dbs.find({}, function(err, docs) {
     // Execute the parameter function
     x(docs);
   });
@@ -34,13 +33,27 @@ exports.getSales = function(x) {
 
 // Deletes a person
 exports.deleteSale = function(id) {
-  db.remove({ _id: id }, {}, function(err, numRemoved) {
+  dbs.remove({ _id: id }, {}, function(err, numRemoved) {
     // Do nothing
   });
 }
 
 exports.getSale = function(id, callback){
-  db.find({Sale_code: id}, function(err,docs){
+  dbs.find({Sale_code: id}, function(err,docs){
     callback(null, docs);
   });
 }
+
+exports.getRevenueTotal = function(t){
+  exports.getSales(function(sales){
+    total = 0
+    for (i = 0; i < sales.length; i++){
+      total = +total + +sales[i].total_price;
+    }
+    t(total);
+  })
+}
+
+exports.getRevenueTotal(function(t){
+  console.log(t);
+})

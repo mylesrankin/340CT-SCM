@@ -30,6 +30,8 @@
 
   <div class="tab-content">
     <div id="home" class="tab-pane fade in active">
+      <h3>Manage Stock</h3>
+          <legend></legend>
         <!-- start of stock management -->
         <div style="margin:25px">
         <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#addnewitem" aria-expanded="false" aria-controls="addnewitem">Show/Hide Add New Item</button>
@@ -134,11 +136,13 @@
     <div id="newsale" class="tab-pane fade">
       <h3>Add a new sale</h3>
 		<form class="form-horizontal">
+
 		<fieldset>
 
 		<!-- Form Name -->
 		<legend></legend>
 
+    <div id="ns_notificationBox"></div>
 		<!-- Text input-->
 		<div class="form-group">
 		  <label class="col-md-4 control-label" for="ns_item_code">Item_Code:</label>  
@@ -181,7 +185,7 @@
 		<div class="form-group">
 		  <label class="col-md-4 control-label" for="ns_total_price">Total_Price:</label>  
 		  <div class="col-md-4">
-		  <input id="ns_total_price" name="total_price" placeholder="total_price" class="form-control input-md" required="" type="text" disabled>
+		  <input id="ns_total_price" name="total_price" placeholder="total_price" class="form-control input-md" required="" type="number" disabled>
 		    
 		  </div>
 		</div>
@@ -225,8 +229,37 @@
 
     </div>
     <div id="saleshistory" class="tab-pane fade">
-      <h3>Menu 1</h3>
-      <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+      <h3>View Sales History</h3>
+          <legend></legend>
+      <h2 id="totalRevenue">£ TOTAL REVENUE</h1>
+      <div class="dataTable">
+            <table class="table table-striped">
+              <thead>
+                <tr>
+                  <th>Sale ID</th>
+                  <th>Sale Item_Code</th>
+                  <th>Sale Qty_Sold</th>
+                  <th>Sale Total_Price</th>
+                  <th>Sale Customer_Name</th>
+                  <th>Sale Cashier_Name</th>
+                  <th>Sale Sale_Date</th>
+                </tr>
+              </thead>
+              <tbody id="salestbody">
+                <tr>
+                  <td>0001</td>
+                  <td>Static_Test_Item</td>
+                  <td>99.99</td>
+                  <td>99</td>
+                  <td>01-01-2017</td>
+                  <td>10</td>
+                  <td>99</td>
+                  <td>Fully Stocked</td>
+                  <td>Derek</td>
+                </tr>
+              </tbody>
+            </table>
+            </div>
     </div>
     <div id="menu2" class="tab-pane fade">
       <h3>Menu 2</h3>
