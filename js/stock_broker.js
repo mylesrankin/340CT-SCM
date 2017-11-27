@@ -1,10 +1,9 @@
-// Initialize the database
+// Initialize the db
 var Datastore = require('nedb');
 db = new Datastore({ filename: 'db/items.db', autoload: true });
 
-// Adds a person
+// Adds an individual stock item
 exports.addItem = function(item_code, item_name, item_price, item_arrivalDate, item_minRestockQty, item_qty, item_maxStockQty, item_staffCheckName) {
-
   var item = {
     'item_code': item_code,
     'item_name': item_name,
@@ -15,81 +14,43 @@ exports.addItem = function(item_code, item_name, item_price, item_arrivalDate, i
     'item_maxStockQty': item_maxStockQty,
     'item_staffCheckName': item_staffCheckName
     };
- 
-  console.log(item);
-
   db.insert(item, function(err, newDoc) {
-    // None
+    notification_broker.create('Stock_Broker:Event','New stock item "' + item_name + '" has been added by user'); // Register event notification log
   });
 };
 
-// Returns all persons
+// Return all stock item records
 exports.getItems = function(x) {
-
-  // Get all persons from the database
   db.find({}, function(err, docs) {
-
-    // Execute the parameter function
-    x(docs);
+  //  notification_broker.create('Stock_Broker:Event','User has retrieved all stock records'); // Register event notification log
+    x(docs); // Use callback to return record data to main_page.js
   });
 }
-
 
 exports.updateItemStock = function(id, newqty){
   db.update({item_code: id},{$inc: {item_qty: newqty}}, function(err, num){
-    // Nothing
+    notification_broker.create('Stock_Broker:Event','SYSTEM has updated item stock level with ID: ' + id); // Register event notification log
   });
 }
 
-// Deletes a person
+// Deletes a stock item from database
 exports.deleteItem = function(id) {
-
   db.remove({ _id: id }, {}, function(err, numRemoved) {
-    // Do nothing
+    notification_broker.create('Stock_Broker:Event','User has deleted the item with ID: ' + id); // Register event notification log
   });
 }
 
+// Updates a specific item
 exports.updateItem = function(item_code, newdata){
   db.update({item_code: item_code}, newdata, function(err,numReplaced){
-    // Do nothing
+    notification_broker.create('Stock_Broker:Event','User has updated records of item with ID: ' + item_code); // Register event notification log
   });
 }
-/*
-var test2 = '';
 
-function checkItem(ic, callback){  
-  db.find({ item_code: ic}, function(err, docs){
-    if(err) return callback(err)
-    if(docs.length > 0){
-      return callback(null, true)
-    }else{
-      return callback(null, false)
-    }
-  });
-
-}
-
-ic = String(1)
-
-
-var test = (checkItem('1', function(err, isItem){
-    return(isItem)
-}))(); */
-
+// Get the records of an individual item
 exports.getItem = function(id, callback){
   db.find({item_code: id}, function(err,docs){
+    notification_broker.create('Stock_Broker:Event','Uses has retrieved records of item with ID: '+ id ); // Register event notification log
     callback(null, docs);
   });
 }
-
-/*
-      if(docs.length > 0){
-        callback = true
-      }else{
-        callback = false
-      }
-
-
-
-
-      */

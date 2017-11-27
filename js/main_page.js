@@ -1,5 +1,6 @@
-const item_broker = require('./js/item_broker')
+const stock_broker = require('./js/stock_broker')
 const sales_broker = require('./js/sales_broker')
+const notification_broker = require('./js/notification_broker')
 const { remote } = require('electron')
 const path = require('path')
 const url = require('url')
@@ -20,6 +21,7 @@ window.onload = function() {
     populateItemTable();
   	populateSelectList();
     populateSalesHistoryTable();
+    populateNotificationTable();
 
   	// Set add new sale date input to todays date
   	var sale_date = document.getElementById('ns_sale_date')
@@ -51,7 +53,7 @@ window.onload = function() {
     if(ns_item_code.value && ns_item_price.value && ns_qty_sold.value && ns_total_price.value && ns_customer_name.value && ns_cashier_name.value && ns_sale_date.value){
       console.log(ns_sale_date.value)
       sales_broker.addSale(ns_item_code.value, ns_item_price.value, ns_qty_sold.value, ns_total_price.value, ns_customer_name.value, ns_cashier_name.value, ns_sale_date.value);
-      notificationBroker('Success! Sale recorded.', 'success', 'ns_notificationBox');
+      notification_broker.displayUINotification('Success! Sale recorded.', 'success', 'ns_notificationBox');
 
       ns_item_code.value = '';
       ns_item_price.value = '';
@@ -63,7 +65,7 @@ window.onload = function() {
 
       populateSalesHistoryTable()
     }else{
-      notificationBroker('One or more fields are empty!', 'warning', 'ns_notificationBox');
+      notification_broker.displayUINotification('One or more fields are empty!', 'warning', 'ns_notificationBox');
     }
 
   });
@@ -84,7 +86,7 @@ window.onload = function() {
     if(item_code.value && item_name.value && item_price.value && item_arrivalDate.value && item_minRestockQty.value && item_maxStockQty.value && item_qty.value && item_staffCheckName.value){
       errorBox.innerHTML = '';
 
-      item_broker.getItem(item_code.value, function(err, docs){
+      stock_broker.getItem(item_code.value, function(err, docs){
           if(docs.length>0){
             console.log("Item exists");
             successBox.innerHTML = '';
@@ -93,8 +95,9 @@ window.onload = function() {
               $("#errorBox").slideUp(500);
             });
           }else{
-            successBox.innerHTML = '<div class="alert alert-success"><strong>Success!</strong> New item has "'+ item_code.value + '" been added.</div>';
-            item_broker.addItem(item_code.value, item_name.value, item_price.value, item_arrivalDate.value, item_minRestockQty.value, item_qty.value, item_maxStockQty.value, item_staffCheckName.value);
+            temp_notifcontent = ' New item has "'+ item_code.value + '" been added';
+            notification_broker.displayUINotification(temp_notifcontent, 'success', 'successBox');
+            stock_broker.addItem(item_code.value, item_name.value, item_price.value, item_arrivalDate.value, item_minRestockQty.value, item_qty.value, item_maxStockQty.value, item_staffCheckName.value);
             $("#successBox").fadeTo(2000, 500).slideUp(500, function(){
               $("#successBox").slideUp(500);
             });
@@ -115,7 +118,8 @@ window.onload = function() {
 
     }else{
       successBox.innerHTML = '';
-      errorBox.innerHTML = '<div class="alert alert-warning"><strong>Error:</strong> One or more fields are empty!</div>';
+      notification_broker.displayUINotification('One or more fields are empty!', 'warning', 'errorBox');
+
     };
 
   });
@@ -137,7 +141,7 @@ window.onload = function() {
   	var item_name = document.getElementById('ns_item_name')
   	var item_price = document.getElementById('ns_item_price')
   	
-  	item_broker.getItem(item_code.value, function(err,docs){
+  	stock_broker.getItem(item_code.value, function(err,docs){
   		console.log(docs);
   		item_name.value = docs[0].item_name;
   		item_price.value = docs[0].item_price
@@ -177,25 +181,6 @@ window.onload = function() {
 
 }
 
-function notificationBroker(notification, type, divID){
-  try{
-    var notifDiv = document.getElementById(divID);
-  }catch(err){
-    console.log(err);
-  }
-  if (type==='clear'){
-    notifDiv.innerHTML = '';
-  }else if (type === 'success'){
-    notifDiv.innerHTML = '<div class="alert alert-success"><strong>Success! </strong>'+ notification +'</div>';
-  }else if (type === 'warning'){
-    notifDiv.innerHTML = '<div class="alert alert-warning"><strong>Error: </strong>'+ notification +'</div>';
-  }
-      //
-    $("#"+divID).fadeTo(2000, 500).slideUp(500, function(){
-      $("#"+divID).slideUp(500);
-    });
-    //
-}
 
 function updateItem(){
 	var item_code = document.getElementById('updateitem_code').value;
@@ -219,7 +204,7 @@ function updateItem(){
     	};
 
    	var ic = String(item_code)
-    item_broker.updateItem(ic, item);
+    stock_broker.updateItem(ic, item);
     console.log('item updated')
     modalName = '#modal' + item_code
     $(modalName).modal('hide');
@@ -267,9 +252,29 @@ function populateSalesHistoryTable(){
   });
 }
 
+function populateNotificationTable(){
+  // Get all sales
+  notification_broker.getNotificationLog(function(notifLogs){
+    // Generate the table body
+    var tableBody = '';
+    for (i = 0; i < notifLogs.length; i++) {
+      tableBody += '<tr>';
+      tableBody += '  <td>' + notifLogs[i]._id + '</td>';
+      tableBody += '  <td>' + notifLogs[i].notification_type + '</td>';
+      tableBody += '  <td>' + notifLogs[i].notification_content + '</td>';
+      tableBody += '  <td>' + notifLogs[i].notification_datetime + '</td>';
+      tableBody += '</tr>';
+    }
+
+    // Fill the table content
+    document.getElementById('notificationlogstable').innerHTML = tableBody
+
+  });
+}
+
 function populateItemTable() {
   // Retrieve the persons
-  item_broker.getItems(function(items) {
+  stock_broker.getItems(function(items) {
     // Generate the table body
     var tableBody = '';
     for (i = 0; i < items.length; i++) {
@@ -395,7 +400,7 @@ function showUpdate(id){
                             </div>\
                             \
                       </td>';
-                      item_broker.getItem(id, function(err,docs){
+                      stock_broker.getItem(id, function(err,docs){
                         console.log(docs)
                       	console.log(docs[0].item_code)
                       	document.getElementById('updateitem_code').value = docs[0].item_code
@@ -413,7 +418,7 @@ function showUpdate(id){
 function deleteItem(id) {
 
   // Delete the item from the database
-  item_broker.deleteItem(id);
+  stock_broker.deleteItem(id);
 
   populateItemTable();
 }
@@ -422,7 +427,7 @@ function deleteItem(id) {
 
 function populateSelectList(){
 	var selectListHTML = '<option value="" disabled selected> Select an Item_Code </option>';
-	item_broker.getItems(function(items){
+	stock_broker.getItems(function(items){
 		for (i = 0; i < items.length; i++) {
 			selectListHTML+= '<option>'+ items[i].item_code +'</option>'
 		};

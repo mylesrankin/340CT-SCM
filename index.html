@@ -24,8 +24,7 @@
     <li class="active"><a data-toggle="tab" href="#home">Manage Stock</a></li>
     <li><a data-toggle="tab" href="#newsale" onclick="populateSelectList()">Add a new sale</a></li>
     <li><a data-toggle="tab" href="#saleshistory">View Sales History</a></li>
-    <li><a data-toggle="tab" href="#menu2">View Staff Logs</a></li>
-    <li><a data-toggle="tab" href="#menu3">Execute Order 66</a></li>
+    <li><a data-toggle="tab" href="#notificationlogs" onclick="populateNotificationTable()">View Notification Logs</a></li>
   </ul>
 
   <div class="tab-content">
@@ -261,13 +260,30 @@
             </table>
             </div>
     </div>
-    <div id="menu2" class="tab-pane fade">
-      <h3>Menu 2</h3>
-      <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam.</p>
+    <div id="notificationlogs" class="tab-pane fade">
+      <h3>Notification Logs</h3>
+          <legend></legend>
+      <div class="dataTable">
+            <table class="table table-striped">
+              <thead>
+                <tr>
+                  <th>Notification ID</th>
+                  <th>Notification Type</th>
+                  <th>Notification Content</th>
+                  <th>Notification Datetime</th>
+                </tr>
+              </thead>
+              <tbody id="notificationlogstable">
+                <tr>
+                  <td>00000000001</td>
+                  <td>Error</td>
+                  <td>Missing field in item form</td>
+                  <td>27/11/2017 17:57:21</td>
+                </tr>
+              </tbody>
+            </table>
+            </div>
     </div>
-    <div id="menu3" class="tab-pane fade">
-      <h3>Menu 3</h3>
-      <p>Eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.</p>
     </div>
   </div>
 </div>
