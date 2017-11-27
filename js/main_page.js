@@ -52,7 +52,7 @@ window.onload = function() {
     var ns_notificationBox = document.getElementById('ns_notificationBox');
 
     if(ns_item_code.value && ns_item_price.value && ns_qty_sold.value && ns_total_price.value && ns_customer_name.value && ns_cashier_name.value && ns_sale_date.value){
-      console.log(ns_sale_date.value)
+      console.log('Sale added')
       sales_broker.addSale(ns_item_code.value, ns_item_price.value, ns_qty_sold.value, ns_total_price.value, ns_customer_name.value, ns_cashier_name.value, ns_sale_date.value);
       notification_broker.displayUINotification('Success! Sale recorded.', 'success', 'ns_notificationBox');
 
@@ -125,25 +125,12 @@ window.onload = function() {
 
   });
 
-/*
- document.getElementById('page2').addEventListener('click', () => {
-    console.log("Go page2");
-    remote.getCurrentWindow().loadURL(url.format({
-        pathname: path.join(__dirname, 'page2.html'),
-        protocol: 'file:',
-        slashes: true
-        })
-    );
-  }); 
-*/
-
   document.getElementById('ns_item_code').addEventListener('change', () => {
   	var item_code = document.getElementById('ns_item_code')
   	var item_name = document.getElementById('ns_item_name')
   	var item_price = document.getElementById('ns_item_price')
   	
   	stock_broker.getItem(item_code.value, function(err,docs){
-  		console.log(docs);
   		item_name.value = docs[0].item_name;
   		item_price.value = docs[0].item_price
   	});
@@ -231,7 +218,6 @@ function populateSalesHistoryTable(){
     // Generate the table body
     var tableBody = '';
     for (i = 0; i < sales.length; i++) {
-      console.log(sales[i].qty_sold);
       tableBody += '<tr>';
       tableBody += '  <td>' + sales[i]._id + '</td>';
       tableBody += '  <td>' + sales[i].item_code + '</td>';
@@ -282,6 +268,8 @@ function populateItemTable() {
       var status = 'Normal';
       if(items[i].item_qty<items[i].item_minRestockQty){
         status = 'Stock Low: Restock Needed';
+        notification_broker.create('Stock_Level:Event','Stock level is low for item' + items[i].item_code +'/' + items[i].item_name + '. Notify logistics to re-order this stock.')
+        // Re-order stock function would go here, see event notification above
       }
       tableBody += '<tr>';
       tableBody += '  <td>' + items[i].item_code + '</td>';
@@ -308,7 +296,6 @@ function populateItemTable() {
 function showUpdate(id){
 	var upd = 'update'+ id
 	var mdl = 'modal'+ id
-	console.log(upd)
 	var updatediv = document.getElementById(upd)
 	updatediv.innerHTML += '<td>\
                                   <!-- Trigger the modal with a button -->\
@@ -402,8 +389,6 @@ function showUpdate(id){
                             \
                       </td>';
                       stock_broker.getItem(id, function(err,docs){
-                        console.log(docs)
-                      	console.log(docs[0].item_code)
                       	document.getElementById('updateitem_code').value = docs[0].item_code
                       	document.getElementById('updateitem_name').value = docs[0].item_name
                       	document.getElementById('updateitem_price').value = docs[0].item_price

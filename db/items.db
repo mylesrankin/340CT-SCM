@@ -2,5 +2,4 @@
 {"item_code":"0006","item_name":"Sweetcorn","item_price":"9.99","item_arrivalDate":"2017-02-02","item_minRestockQty":"99","item_qty":"99","item_maxStockQty":"100","item_staffCheckName":"Test","_id":"6o9JpkalWHbfdMGi"}
 {"item_code":"2","item_name":"Test Item Apple","item_price":"22","item_arrivalDate":"2017-11-10","item_minRestockQty":"22","item_qty":"25","item_maxStockQty":"1111","item_staffCheckName":"Test","_id":"Djr2qdlV6slo47Ce"}
 {"item_code":"23452","item_name":"2345","item_price":"345","item_arrivalDate":"2017-11-09","item_minRestockQty":"234523","item_qty":"345234","item_maxStockQty":"52345","item_staffCheckName":"4523","_id":"SEQCxj2dlz0LzuRF"}
-{"item_code":"111111","item_name":"test","item_price":"1231232","item_arrivalDate":"2222-02-22","item_minRestockQty":"2","item_qty":"22","item_maxStockQty":"2","item_staffCheckName":"22","_id":"lh5dnLBBleRhuVoH"}
-{"$$deleted":true,"_id":"lh5dnLBBleRhuVoH"}
+{"item_code":"22","item_name":"Guy","item_price":"22","item_arrivalDate":"0222-02-22","item_minRestockQty":"57","item_qty":"10","item_maxStockQty":"22","item_staffCheckName":"Test","_id":"3a007K8FjHxEB6Qg"}

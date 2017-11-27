@@ -41,7 +41,6 @@ exports.getRevenueTotal = function(t){
 }
 // Make above function availible simply
 exports.getRevenueTotal(function(t){
-  console.log(t);
 })
 
 
