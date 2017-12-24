@@ -145,28 +145,6 @@ window.onload = function() {
   	total_price.value = item_price.value * qty_sold.value
 
   });
-
-  /*
-  document.getElementById('ns_today').addEventListener('click', () => {
-  	var sale_date = document.getElementById('ns_sale_date')
-  	var today = new Date();
-	var dd = today.getDate();
-	var mm = today.getMonth()+1; //January is 0!
-
-	var yyyy = today.getFullYear();
-	if(dd<10){
-	    dd='0'+dd;
-	} 
-	if(mm<10){
-	    mm='0'+mm;
-	} 
-	var today = yyyy+'-'+mm+'-'+dd;
-
-  	sale_date.value = today
-
-  });
-  */
-
 }
 
 
@@ -405,7 +383,8 @@ function deleteItem(id) {
 
   // Delete the item from the database
   stock_broker.deleteItem(id);
-
+  var notiftemp = 'Item with ID: ' + id + ' has been deleted.';
+  notification_broker.displayUINotification(notiftemp, 'danger', 'successBox');
   populateItemTable();
 }
 

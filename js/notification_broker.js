@@ -47,6 +47,9 @@ exports.displayUINotification = function(notification, type, divID){
   }else if (type === 'warning'){
     notification_broker.create('User_Alert:Error', 'User error occured: <i>' + notification + '</i>');
     notifDiv.innerHTML = '<div class="alert alert-warning"><strong>Error: </strong>'+ notification +'</div>';
+  }else if (type === 'danger'){
+    notification_broker.create('User_Alert:Error', 'Deletion occured: <i>' + notification + '</i>');
+    notifDiv.innerHTML = '<div class="alert alert-danger"><strong>Deletion: </strong>'+ notification +'</div>';
   }
       //
     $("#"+divID).fadeTo(2000, 500).slideUp(500, function(){
