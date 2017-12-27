@@ -1,9 +1,12 @@
+// This file just initialises the electron wrapper/window, loads main template and loads some other elements
+// The other js files then manipulate what is in the mainWindow
+// Think of this as a init/run application file
 const electron = require('electron')
 const {app, BrowserWindow, Menu} = electron
 const path = require('path')
 const url = require('url')
 
-// Template for the Menu
+// Menu template, about app
 menuTemplate = [
   {
     label: 'Application',
@@ -17,13 +20,11 @@ menuTemplate = [
     ]
   }
 ]
-
-// Keep a global reference so the garbage collector does not destroy our app
-let mainWindow
+let mainWindow // Gbl reference
 
 function createWindow () {
 
-  // Create the browser window.
+  // Create the window
   mainWindow = new BrowserWindow({
     width: 1500,
     height: 720
@@ -45,7 +46,7 @@ function createWindow () {
   })
 }
 
-// Opens the about window
+// Opens about window
 function openAboutWindow() {
 
   let aboutWindow = new BrowserWindow({
@@ -66,7 +67,7 @@ function openAboutWindow() {
   })
 }
 
-// Create the window then the app is ready
+// Create window then the app is ready (event)
 app.on('ready', () => {
   createWindow()
   electron.powerMonitor.on('on-ac', () => {
@@ -84,7 +85,7 @@ app.on('window-all-closed', () => {
   }
 })
 
-// Reopen the app on macOS
+// Reopen for mac osx compatibility 
 app.on('activate', () => {
   if (mainWindow === null) {
     createWindow()

@@ -1,3 +1,4 @@
+// Includes
 const stock_broker = require('./js/stock_broker')
 const sales_broker = require('./js/sales_broker')
 const notification_broker = require('./js/notification_broker')
@@ -40,7 +41,9 @@ window.onload = function() {
 	  var today = yyyy+'-'+mm+'-'+dd;
   	sale_date.value = today
 
-  document.getElementById('add_ns').addEventListener('click', () => {
+    // NEW SALE ACTION
+  document.getElementById('add_ns').addEventListener('click', () => { // New sale broker event listener
+    // Grab form inputs
     var ns_item_code = document.getElementById('ns_item_code');
     var ns_item_price = document.getElementById('ns_item_price');
     var ns_qty_sold = document.getElementById('ns_qty_sold');
@@ -51,11 +54,14 @@ window.onload = function() {
 
     var ns_notificationBox = document.getElementById('ns_notificationBox');
 
+    // Validate form input
     if(ns_item_code.value && ns_item_price.value && ns_qty_sold.value && ns_total_price.value && ns_customer_name.value && ns_cashier_name.value && ns_sale_date.value){
       console.log('Sale added')
+      // Send input to brokers
       sales_broker.addSale(ns_item_code.value, ns_item_price.value, ns_qty_sold.value, ns_total_price.value, ns_customer_name.value, ns_cashier_name.value, ns_sale_date.value);
       notification_broker.displayUINotification('Success! Sale recorded.', 'success', 'ns_notificationBox');
 
+      // Reset input fields
       ns_item_code.value = '';
       ns_item_price.value = '';
       ns_qty_sold.value = '';
@@ -64,6 +70,7 @@ window.onload = function() {
       ns_cashier_name.value = '';
       ns_sale_date.value = '';
 
+      // Re populate dynamic content (because it changed after new sale added)
       populateSalesHistoryTable()
     }else{
       notification_broker.displayUINotification('One or more fields are empty!', 'warning', 'ns_notificationBox');
@@ -71,7 +78,9 @@ window.onload = function() {
 
   });
 
-  document.getElementById('add').addEventListener('click', () => {
+  // STOCK BROKER ACTION
+  document.getElementById('add').addEventListener('click', () => { // Bind event listener to new stock addition
+    // Grab form inputs
     var item_code = document.getElementById('item_code');
     var item_name = document.getElementById('item_name');
     var item_price = document.getElementById('item_price');
@@ -84,10 +93,11 @@ window.onload = function() {
     var sucessBox = document.getElementById('successBox');
     var x = document.getElementById("formDiv");
 
+    // Validate
     if(item_code.value && item_name.value && item_price.value && item_arrivalDate.value && item_minRestockQty.value && item_maxStockQty.value && item_qty.value && item_staffCheckName.value){
       errorBox.innerHTML = '';
 
-      stock_broker.getItem(item_code.value, function(err, docs){
+      stock_broker.getItem(item_code.value, function(err, docs){ // Call stock broker, check if item exists
           if(docs.length>0){
             console.log("Item exists");
             successBox.innerHTML = '';
@@ -95,7 +105,7 @@ window.onload = function() {
             $("#errorBox").fadeTo(2000, 500).slideUp(500, function(){
               $("#errorBox").slideUp(500);
             });
-          }else{
+          }else{ // Add item if it doesn't exist
             temp_notifcontent = ' New item has "'+ item_code.value + '" been added';
             notification_broker.displayUINotification(temp_notifcontent, 'success', 'successBox');
             stock_broker.addItem(item_code.value, item_name.value, item_price.value, item_arrivalDate.value, item_minRestockQty.value, item_qty.value, item_maxStockQty.value, item_staffCheckName.value);
@@ -112,6 +122,7 @@ window.onload = function() {
             item_staffCheckName.value = '';
             item_qty.value = '';
             $('#addnewitem').collapse('hide');
+            // Repopulate dynamic content upon new item event
             populateItemTable();
             populateSelectList();
           }
@@ -125,14 +136,14 @@ window.onload = function() {
 
   });
 
-  document.getElementById('ns_item_code').addEventListener('change', () => {
+  document.getElementById('ns_item_code').addEventListener('change', () => { // Event listener checks for new sale item code input changes
   	var item_code = document.getElementById('ns_item_code')
   	var item_name = document.getElementById('ns_item_name')
   	var item_price = document.getElementById('ns_item_price')
   	
   	stock_broker.getItem(item_code.value, function(err,docs){
-  		item_name.value = docs[0].item_name;
-  		item_price.value = docs[0].item_price
+  		item_name.value = docs[0].item_name; // find item name and set doc input to this for user
+  		item_price.value = docs[0].item_price // set item price in form input
   	});
 
     });
@@ -149,6 +160,7 @@ window.onload = function() {
 
 
 function updateItem(){
+  // Update UI and call broker update on current selected item
 	var item_code = document.getElementById('updateitem_code').value;
   var item_name = document.getElementById('updateitem_name').value;
   var item_price = document.getElementById('updateitem_price').value;
@@ -190,12 +202,12 @@ function updateItem(){
 
 
 
-function populateSalesHistoryTable(){
+function populateSalesHistoryTable(){ // Populates dynamic ui content
   // Get all sales
-  sales_broker.getSales(function(sales){
+  sales_broker.getSales(function(sales){ // get data
     // Generate the table body
-    var tableBody = '';
-    for (i = 0; i < sales.length; i++) {
+    var tableBody = ''; // table body
+    for (i = 0; i < sales.length; i++) { // Loop through data and generate html rows
       tableBody += '<tr>';
       tableBody += '  <td>' + sales[i]._id + '</td>';
       tableBody += '  <td>' + sales[i].item_code + '</td>';
@@ -217,12 +229,12 @@ function populateSalesHistoryTable(){
   });
 }
 
-function populateNotificationTable(){
+function populateNotificationTable(){ // Populates dynamic ui content for notifications
   // Get all sales
-  notification_broker.getNotificationLog(function(notifLogs){
+  notification_broker.getNotificationLog(function(notifLogs){ 
     // Generate the table body
     var tableBody = '';
-    for (i = 0; i < notifLogs.length; i++) {
+    for (i = 0; i < notifLogs.length; i++) { // Loop through data and generate html rows
       tableBody += '<tr>';
       tableBody += '  <td>' + notifLogs[i]._id + '</td>';
       tableBody += '  <td>' + notifLogs[i].notification_type + '</td>';
@@ -237,12 +249,12 @@ function populateNotificationTable(){
   });
 }
 
-function populateItemTable() {
+function populateItemTable() { // Populates dynamic ui content for stock items
   // Retrieve the persons
   stock_broker.getItems(function(items) {
     // Generate the table body
     var tableBody = '';
-    for (i = 0; i < items.length; i++) {
+    for (i = 0; i < items.length; i++) { // Loop through data and generate html rows
       var status = 'Normal';
       if(items[i].item_qty<items[i].item_minRestockQty){
         status = 'Stock Low: Restock Needed';
@@ -271,7 +283,7 @@ function populateItemTable() {
 }
 
 
-function showUpdate(id){
+function showUpdate(id){ // Shows update ui form when update button is pressed on stock page
 	var upd = 'update'+ id
 	var mdl = 'modal'+ id
 	var updatediv = document.getElementById(upd)
@@ -390,10 +402,10 @@ function deleteItem(id) {
 
 
 
-function populateSelectList(){
+function populateSelectList(){ // Populates dynamic select drop down on add sales page
 	var selectListHTML = '<option value="" disabled selected> Select an Item_Code </option>';
 	stock_broker.getItems(function(items){
-		for (i = 0; i < items.length; i++) {
+		for (i = 0; i < items.length; i++) { // Loop through data and generate html rows
 			selectListHTML+= '<option>'+ items[i].item_code +'</option>'
 		};
 	var selectList = document.getElementById('ns_item_code')
@@ -401,6 +413,6 @@ function populateSelectList(){
 	});
 }
 
-function test(){
+function test(){ // For testing purposes
 	console.log("Test");
 }
