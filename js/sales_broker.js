@@ -1,3 +1,4 @@
+// Sales broker core functionality
 // Initialize the db
 var Datastores = require('nedb');
 dbs = new Datastores({ filename: 'db/sales.db', autoload: true });
@@ -20,7 +21,7 @@ exports.addSale = function(ns_item_code, ns_item_price, ns_qty_sold, ns_total_pr
   });
 };
 
-// Returns all persons
+// Returns all sales
 exports.getSales = function(x) {
   // Get all persons from the database
   dbs.find({}, function(err, docs) {
@@ -47,7 +48,7 @@ exports.getRevenueTotal(function(t){
 // Other sales broker functionality that was useful for testing 
 // but may also be useful for future development
 
-// Deletes a person
+// Deletes a sale
 exports.deleteSale = function(id) {
   dbs.remove({ _id: id }, {}, function(err, numRemoved) {
     // Do nothing
